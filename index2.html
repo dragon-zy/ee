@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			*{
+				-webkit-box-sizing: border-box;
+			}
+			html,body,ul{
+				margin: 0;
+				padding: 0;
+				width: 100%;
+				height: 100%;
+			}
+			.box{
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+			}
+			.box ul{
+				width: 400%;
+				height: 4rem;
+				position: relative;
+				left: 0;
+			}
+			li{
+				list-style: none;
+				width: 25%;
+				height: 4rem;
+				border: .01rem solid red;
+				float: left;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box" id="box">
+			<ul>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		new function(){
+			document.documentElement.style.fontSize=innerWidth/3.75+"px";
+			window.addEventListener("resize",function(){
+			document.documentElement.style.fontSize=innerWidth/3.75+"px";},false);
+		}
+		var getStyle = function(obj,attr){		//获得两个参数，1、对象 2、属性
+			if(obj.currentStyle){				//IE兼容
+				return obj.currentStyle[attr];
+			}else{								//其他
+				return window.getComputedStyle(obj,null)[attr];
+			}
+		}
+		var oUl = document.getElementsByTagName('ul')[0];
+		var lis = document.getElementsByTagName('li');
+		var f = parseInt(getStyle(lis[0],'width'));
+		var lf = 0;
+		var lef = 0;
+		oUl.addEventListener('touchstart',function(ev){
+			ev.preventDefault();
+			var ex = ev.changedTouches[0].pageX;
+			lef = this.offsetLeft;
+			
+			oUl.addEventListener('touchmove',function(ev){
+				var ed = ev.changedTouches[0].pageX-ex;
+				console.log(ed,lef)
+				
+				oUl.style.left = lef +ed + 'px';
+			});
+			oUl.addEventListener('touchend',function(ev){
+				n = Math.round(this.offsetLeft/f);
+				this.style.left = n*f+'px';
+			})
+		});
+	</script>
+</html>
