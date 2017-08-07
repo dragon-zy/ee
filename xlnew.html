@@ -177,18 +177,18 @@
 					console.log(dir)
 					if(oDiv&&dir>0){
 						var str = '';
-						//$.ajax({
-							//url:'deom.json',
-							//method:'get',
-							//success:function(data){
-								//console.log(data.list)
-								//for(let a of data.list){
+						$.ajax({
+							url:'deom.json',
+							method:'get',
+							success:function(data){
+								console.log(data.list)
+								for(let a of data.list){
 									str += '<li>' + "dfdsf" + '</li>';
-								//}
+								}
 								var htl = $('#list').html();
 								$('#listul').html(str+htl);
-							//}
-						//});
+							}
+						});
 						oDiv.remove();
 						flag = false;
 						oDiv = null;
