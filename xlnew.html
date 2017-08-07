@@ -36,6 +36,11 @@
 				overflow: auto;
 				width: 100%;
 			}
+			.load{
+				height: .3rem;
+				color: red;
+				background: #ccc;
+			}
 		</style>
 	</head>
 	<body>
@@ -160,31 +165,32 @@
 			$('#list').on('touchstart',function(e){
 				var ey = e.touches[0].pageY;
 				var dir=0;
-			
+				console.log(ey)
+				var st = $('#list').scrollTop();
 				$('#list').on('touchmove',function(e){
-					var st = $('#list').scrollTop();
+					st = $('#list').scrollTop();
 					dir = e.touches[0].pageY-ey;
-					console.log(dir)
+					console.log('ey'+ey,e.touches[0].pageY,'dir'+dir);
 					if(dir>0 && st == 0 ){
 						console.log("up...");
 						if(!flag){
-							oDiv = $('<div>').html('load......').prependTo($('#list'));
+							oDiv = $('<div class="load">').html('load......').prependTo($('#list'));
 							flag = true;
 						}
 					}
 				});
 				$('#list').on('touchend',function(e){
-					console.log(dir)
-					if(oDiv&&dir>0){
+					if(oDiv && st==0){
+						console.log('dir'+dir)
 						var str = '';
 						$.ajax({
 							url:'deom.json',
 							method:'get',
 							success:function(data){
-								console.log(data.list)
-								for(let a of data.list){
+//								console.log(data.list)
+//								for(let a of data.list){
 									str += '<li>' + "dfdsf" + '</li>';
-								}
+//								}
 								var htl = $('#list').html();
 								$('#listul').html(str+htl);
 							}
@@ -192,6 +198,11 @@
 						oDiv.remove();
 						flag = false;
 						oDiv = null;
+					}
+					else{
+						if(oDiv){
+							oDiv.remove();
+						}
 					}
 				});
 			});
