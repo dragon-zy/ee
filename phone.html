@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="https://unpkg.com/vue"></script>
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/phone.css"/>
+		<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/ionicons/2.0.1/css/ionicons.css"/>
+	</head>
+	<body>
+		<header>
+			<div class="header-top">
+				<div class="header-top-l">
+					<i class="icon ion-ios-settings-strong"></i>
+				</div>
+				<div class="header-top-c">
+					<i class="icon ion-locked"></i>
+					<span>test</span>
+				</div>
+				<div class="header-top-r">
+					<i class="icon ion-android-refresh"></i>
+				</div>
+			</div>
+			<div class="header-bottom">
+				<div class="header-bottom-c">
+					<span class="co">综合</span>
+					<i class="co icon ion-chevron-down"></i>
+				</div>
+				<div class="header-bottom-c">
+					<span>销量</span>
+				</div>
+				<div class="header-bottom-c">
+					<span>价格</span>
+					<span>
+						<i class="icon ion-chevron-down"></i>
+						<i class="co icon ion-chevron-down"></i>
+					</span>
+				</div>
+				<div class="header-bottom-c">
+					<span>筛选</span>
+					<i></i>
+				</div>
+			</div>
+		</header>
+		<section>
+			<div class="container" id="con">
+				<!--<div class="container-c">
+					<div class="container-c-img">
+						<img src="img/phone.png" alt="" />
+					</div>
+					<div class="container-c-text">
+						<h6>苹果（Apple）iPhone 6(A1586) 16GB 金色 移动联通电信4G手机</h6>
+						<p>&yen; 4888.00</p>
+						<span>好评96% 59091人</span>
+					</div>
+				</div>-->
+				<pal></pal>
+				<pal></pal>
+				<pal></pal>
+				<pal></pal>
+				<pal></pal>
+				<pal></pal>
+				<pal></pal>
+			</div>
+		</section>
+	</body>
+	<script type="text/javascript">
+		new function(){
+			document.documentElement.style.fontSize=innerWidth/3.20+"px";
+			window.addEventListener("resize",function(){
+			document.documentElement.style.fontSize=innerWidth/3.20+"px";},false);
+		}
+		Vue.component('pal',{
+			template:'<div class="container-c"><div class="container-c-img"><img src="img/phone.png" alt="" /></div><div class="container-c-text"><h6>苹果（Apple）iPhone 6(A1586) 16GB 金色 移动联通电信4G手机</h6><p>&yen; 4888.00</p><span>好评96% 59091人</span></div></div>'
+		});
+		var vm = new Vue({
+			el:"#con"
+		});
+	</script>
+</html>

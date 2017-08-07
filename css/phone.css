@@ -1,0 +1,105 @@
+*{
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	font-family: "微软雅黑";
+}
+html,body{
+	width: 100%;
+	height: 100%;
+}
+
+header{
+	width: 100%;
+	height: .8rem;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+header .header-top{
+	width: 100%;
+	height: .4rem;
+	background: #ef3239;
+	font-size: .2rem;
+	padding: 0 .2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: #fff;
+}
+.header-top-c{
+	font-size: .16rem;
+	font-weight: bold;
+}
+header .header-bottom{
+	width: 100%;
+	height: .4rem;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	font-size: .16rem;
+	display: flex;
+	justify-content: space-around;
+	align-content: center;
+	border-bottom: 1px solid #ccc;
+	background: #fff;
+}
+header .header-bottom .header-bottom-c{
+	display: flex;
+	align-items: center;
+	color: #808080;
+	
+}
+header .header-bottom .header-bottom-c span:first-of-type{
+	margin-right: .03rem;
+	font-size: .15rem;
+}
+header .header-bottom .header-bottom-c span:last-of-type{
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	font-size: .15rem;
+}
+header .header-bottom .header-bottom-c i{
+}
+header .header-bottom .header-bottom-c span:last-of-type i{
+	font-size: .08rem;
+	line-height: .08rem;
+}
+header .header-bottom .header-bottom-c span:last-of-type i:first-of-type{
+	transform: rotate(180deg);
+	margin-right: .02rem;
+}
+.co{
+	color: #ef3239 !important;
+}
+section{
+	padding-top: .8rem;
+}
+.container-c{
+	width: 100%;
+	padding: .1rem .3rem;
+	display: flex;
+	justify-content: space-between;
+	font-size: .14rem;
+	border-bottom: 1px solid #ccc;
+}
+.container-c-img img{
+	display: block;
+	width: .5rem;
+}
+.container-c-text{
+	width: 1.8rem;
+}
+.container-c-text h6{
+	font-weight: 100;
+	line-height: .18rem;
+}
+.container-c-text p{
+	color: #ef3239;
+	font-size: .16rem;
+	padding: .2rem 0 .05rem;
+}
+.container-c-text span{
+	font-size: .12rem;
+	color: #808080;
+}
