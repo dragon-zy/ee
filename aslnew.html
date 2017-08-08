@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+ <style>
+		*{
+			margin:0;
+			padding:0;
+			-webkit-box-sizing:border-box;
+		}
+		html,body{
+			width:100%;
+			height: 100%;
+		    overflow: hidden;
+		}
+		.container{
+			width:100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+		}
+		footer,header{
+			width:100%;
+			height: 40px;
+			background: #ccc;
+		}
+		section{
+			flex:1;
+			width:100%;
+			overflow: auto;
+		}
+		ul{
+			width:100%;
+			height: 100%;
+		}
+		ul li{
+			height: 30px;
+			line-height: 30px;
+			border-bottom:1px solid #000;
+		}
+		.preload{
+			background: pink;
+		}
+		.preload::after{
+			content:'';
+			display: inline-block;
+			width:15px;
+			height: 15px;
+			border-bottom: 2px solid blue;
+			border-top:none;
+			border-left:none;
+			border-radius: 50%;
+			animation: rotate 1s infinite;
+		}
+		@keyframes rotate{
+			from{
+				transform:rotate(0deg);
+			}
+			to{
+				transform:rotate(360deg);
+			}
+
+		}
+
+		
+   </style>
+   <script src="zepto.min.js"></script>
+   <script>
+       $(function(){
+       	     var flag=false;
+       	     var dir=0;
+       		 $("#list").on("touchstart",function(e){
+       		 var oDiv=null;
+           	  var ey=e.touches[0].pageY;
+           
+           	  var st=$("#list").scrollTop();
+           	  
+              var lh=$("#listitems").find("li").height();
+           	  $("#list").on("touchmove",function(e){
+           	    
+       		 	  dir = e.touches[0].pageY-ey;
+       		 	   st=$("#list").scrollTop();
+       		 	  // console.log("ey---"+ey+","+ e.touches[0].pageY+","+dir);
+       		 	  if(dir>0 && st==0){
+       		 	  	  if(!flag)
+       		 	  	  {
+       		 	  	  	oDiv=$("<Div class=\"preload\"> style='height:100px;-webkit-transition: all 200ms'").html("load....").prependTo($("#list"));
+       		 	  	  	   flag=true;
+       		 	  	  }
+       		 	  	    
+
+       		 	  }
+       		 	   
+       		 	 
+       		 })
+           	 $("#list").on("touchend",function(e){
+           	 	
+           	   if(oDiv){
+           	   	
+           	   	  var str="";
+           	   	   $.ajax({
+           	   	   	   url:'deom.json',
+           	   	   	   method:'get',
+           	   	   	   success:function(data){
+           	   	   	   	   
+           	   	   	   	  for(let a of data.list){
+           	   	   	   	     	str+="<li>"+a.title+"</li>";
+           	   	   	   	  	
+           	   	   	   	  }
+           	   	   	   	  ey=ey+lh*data.list.length;
+           	   	   	   	    var html=$("#listitems").html()
+           	   	   	   	    oDiv.remove();
+           	   			  $("#listitems").html(str+html);
+           	 	   			
+           	 	   			flag=false;
+           	 	   			oDiv=null;
+           	 	   			
+           	   	   	   }
+           	   	   })
+           	   }
+           	
+           	  
+           	 	 
+           	 })
+           })
+
+       })
+          
+   </script>
+   
+</head>
+<body>
+  
+	 <div class="container">
+		<header>header</header>
+		<section id="list">
+			<ul id="listitems">
+			   <li>abc1</li>
+			   <li>abc2</li>
+			   <li>abc3</li>
+			   <li>abc4</li>
+			   <li>abc5</li>
+			   <li>abc6</li>
+			   <li>abc7</li>
+			   <li>abc8</li>
+			   <li>abc9</li>
+			   <li>abc10</li>
+			   <li>abc11</li>
+			   <li>abc12</li>
+			   <li>abc13</li>
+			   <li>abc14</li>
+			   <li>abc15</li>
+			   <li>abc16</li>
+			   <li>abc17</li>
+			   <li>abc18</li>
+			   <li>abc19</li>
+			   <li>abc20</li>
+			   <li>abc21</li>
+			   <li>abc22</li>
+			   <li>abc23</li>
+			   <li>abc24</li>
+			   <li>abc25</li>
+			   <li>abc26</li>
+			   <li>abc27</li>
+			   <li>abc28</li>
+			   <li>abc29</li>
+			   <li>abc30</li>
+			</ul>
+		</section>
+		<footer>footer</footer>		
+    </div>
+</body>
+   
+
+</html>
