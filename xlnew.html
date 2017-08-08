@@ -17,6 +17,16 @@
 			}
 			li{
 				list-style: none;
+				padding: 0;
+				margin: 0;
+				height: .2rem;
+				width: 100%;
+				overflow: hidden;
+			}
+			ul{
+				padding: 0;
+				margin: 0;
+				height: auto;
 			}
 			.container{
 				width: 100%;
@@ -30,6 +40,9 @@
 				width: 100%;
 				height: .4rem;
 				background: lightcyan;
+				display: flex;
+				align-items: center;
+				justify-content: center;
 			}
 			section{
 				flex: 1;
@@ -37,9 +50,75 @@
 				width: 100%;
 			}
 			.load{
-				height: .3rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
 				color: red;
-				background: #ccc;
+				font-size: .18rem;
+				text-align: center;
+				border-bottom: 1px solid #ccc;
+				overflow: hidden;
+				transition: all .3s;
+				height: .4rem;
+			}
+			.load::after{
+				content: "";
+				display: inline-block;
+				width: .16rem;
+				height: .16rem;
+				border: 2px solid #ccc;
+				margin-left: .1rem;
+				box-sizing: border-box;
+				border-right-color:transparent;
+				border-radius: 50%;
+				animation: auto .7s linear infinite;
+			}
+			.down{
+				display: flex;
+				/*align-items: center;*/
+				justify-content: center;
+				color: red;
+				font-size: .18rem;
+				text-align: center;
+				border-bottom: 1px solid #ccc;
+				overflow: hidden;
+				transition: all .3s;
+				height: 100px;
+			}
+			.down::after{
+				content: "";
+				display: inline-block;
+				width: .16rem;
+				height: .16rem;
+				border: 2px solid #ccc;
+				margin-left: .1rem;
+				box-sizing: border-box;
+				border-right-color:transparent;
+				border-radius: 50%;
+				animation: auto .7s linear infinite;
+			}
+			.jz{
+				width: 100%;
+				height: .5rem;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			@keyframes auto{
+				from{
+					transform: rotate(0deg);
+				}
+				to{
+					transform: rotate(360deg);
+				}
+			}
+			@keyframes hei{
+				from{
+					height: 0;
+				}
+				to{
+					height: .3rem;
+				}
 			}
 		</style>
 	</head>
@@ -98,57 +177,8 @@
 					<li>abc48</li>
 					<li>abc49</li>
 					<li>abc50</li>
-					<li>abc51</li>
-					<li>abc52</li>
-					<li>abc53</li>
-					<li>abc54</li>
-					<li>abc55</li>
-					<li>abc56</li>
-					<li>abc57</li>
-					<li>abc58</li>
-					<li>abc59</li>
-					<li>abc60</li>
-					<li>abc61</li>
-					<li>abc62</li>
-					<li>abc63</li>
-					<li>abc64</li>
-					<li>abc65</li>
-					<li>abc66</li>
-					<li>abc67</li>
-					<li>abc68</li>
-					<li>abc69</li>
-					<li>abc70</li>
-					<li>abc71</li>
-					<li>abc72</li>
-					<li>abc73</li>
-					<li>abc74</li>
-					<li>abc75</li>
-					<li>abc76</li>
-					<li>abc77</li>
-					<li>abc78</li>
-					<li>abc79</li>
-					<li>abc80</li>
-					<li>abc81</li>
-					<li>abc82</li>
-					<li>abc83</li>
-					<li>abc84</li>
-					<li>abc85</li>
-					<li>abc86</li>
-					<li>abc87</li>
-					<li>abc88</li>
-					<li>abc89</li>
-					<li>abc90</li>
-					<li>abc91</li>
-					<li>abc92</li>
-					<li>abc93</li>
-					<li>abc94</li>
-					<li>abc95</li>
-					<li>abc96</li>
-					<li>abc97</li>
-					<li>abc98</li>
-					<li>abc99</li>
-					<li>abc100</li>
 				</ul>
+				<!--<div class="jz">加载中....</div>-->
 			</section>
 			<footer>尾部</footer>
 		</div>
@@ -161,38 +191,66 @@
 		}
 		$(function(){
 			var flag = false;
-				var oDiv = null;
+			var flagw = false;
+			var oDiv = null,oDiv1 = null;
+			var tag=true;
+			var ey;
+			var lh=$("#listul").find("li").height();
 			$('#list').on('touchstart',function(e){
-				var ey = e.touches[0].pageY;
-				var dir=0;
-				console.log(ey)
+			
+				var diry=0,dirx=0;
+				console.log()
+//				console.log(e.changedTouches)
 				var st = $('#list').scrollTop();
 				$('#list').on('touchmove',function(e){
-					st = $('#list').scrollTop();
-					dir = e.touches[0].pageY-ey;
-					console.log('ey'+ey,e.touches[0].pageY,'dir'+dir);
-					if(dir>0 && st == 0 ){
+					diry = e.touches[0].pageY-ey;
+					
+				   	st = $('#list').scrollTop();
+//					console.log('ey'+ey,e.touches[0].pageY,'dir'+diry,'st'+st);
+					if(diry>0 && st == 0 ){
 						console.log("up...");
 						if(!flag){
-							oDiv = $('<div class="load">').html('load......').prependTo($('#list'));
+							oDiv = $('<div class="load">').html('load').prependTo($('#list'));
 							flag = true;
 						}
 					}
+					ey = e.touches[0].pageY;
+					if(diry<50&&st == $('#listul').height()-$('#list').height() ){
+						console.log("down...");
+						if(!flagw){
+							oDiv1 = $('<div class="down">').html('down').appendTo($('#listul'));
+							flagw = true;
+						}
+					}
+					
+//					console.log('li'+$('#listul'));
+//					console.log($('#listul').children().length+'个数');
 				});
 				$('#list').on('touchend',function(e){
+					if(oDiv1 && st==$('#listul').height()-$('#list').height()){
+						var dd = $('<li>').html('new'+$('#listul').find('li').size()).appendTo($('#listul'));
+						oDiv1.remove();
+						flagw = false;
+						oDiv1 = null;
+					}
+//					st = $('#list').scrollTop();
+//					console.log(st)
 					if(oDiv && st==0){
-						console.log('dir'+dir)
+//						console.log('dir'+dir)
 						var str = '';
 						$.ajax({
 							url:'deom.json',
 							method:'get',
 							success:function(data){
+								
 //								console.log(data.list)
 //								for(let a of data.list){
 									str += '<li>' + "dfdsf" + '</li>';
 //								}
 								var htl = $('#list').html();
 								$('#listul').html(str+htl);
+                                ey=ey+lh;
+                                console.log(lh)
 							}
 						});
 						oDiv.remove();
@@ -202,6 +260,9 @@
 					else{
 						if(oDiv){
 							oDiv.remove();
+						}
+						if(oDiv1){
+							oDiv1.remove();
 						}
 					}
 				});
